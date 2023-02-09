@@ -2,8 +2,8 @@ module ConstraintLearningBenchmarks
 
 # usings
 using BenchmarkTools
-using CompositionalNetworks
 using ConstraintDomains
+using ConstraintLearning
 using Constraints
 using CSV
 using DataFrames
