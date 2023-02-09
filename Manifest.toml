@@ -2,7 +2,7 @@
 
 julia_version = "1.9.0-beta3"
 manifest_format = "2.0"
-project_hash = "b0d3c9b622f7aec4a0cc1bdcacabd930e30944d5"
+project_hash = "3a92dcd2a91d663bf0bd31478891f3a78b464fd2"
 
 [[deps.AbstractFFTs]]
 deps = ["ChainRulesCore", "LinearAlgebra"]
@@ -187,10 +187,10 @@ uuid = "5800fd60-8556-4464-8d61-84ebf7a0bedb"
 version = "0.3.6"
 
 [[deps.ConstraintLearning]]
-deps = ["CompositionalNetworks", "ConstraintDomains", "Constraints", "DataFrames", "Dictionaries", "Evolutionary", "Flux", "LocalSearchSolvers", "Memoization", "PrettyTables", "QUBOConstraints", "ThreadPools"]
-git-tree-sha1 = "62cc7c8fa4a80dae44814fc7bbfb4c4fd153deac"
+deps = ["CompositionalNetworks", "ConstraintDomains", "Constraints", "DataFrames", "Dictionaries", "Evolutionary", "Flux", "LocalSearchSolvers", "Memoization", "PrettyTables", "QUBOConstraints", "TestItemRunner", "TestItems", "ThreadPools"]
+path = "/home/azzaare/.julia/dev/ConstraintLearning"
 uuid = "4bd09668-9077-4be7-adc9-6307a490e6df"
-version = "0.1.4"
+version = "0.1.5"
 
 [[deps.Constraints]]
 deps = ["CompositionalNetworks", "ConstraintCommons", "ConstraintDomains", "DataFrames", "Dictionaries", "MacroTools", "PrettyTables"]
@@ -657,9 +657,9 @@ version = "2.28.0+0"
 
 [[deps.Memoization]]
 deps = ["MacroTools"]
-git-tree-sha1 = "55dc27dc3d663900d1d768822528960acadc012a"
+git-tree-sha1 = "2f6913923a0cb8046134f5cbf8b4d7ba3c856a1d"
 uuid = "6fafb56a-5788-4b4e-91ca-c0cea6611c73"
-version = "0.1.14"
+version = "0.2.0"
 
 [[deps.MicroCollections]]
 deps = ["BangBang", "InitialValues", "Setfield"]

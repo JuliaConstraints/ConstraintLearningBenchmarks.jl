@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "ICN benchmarks"
+@quickactivate "Constraint Learning Benchmarks"
 
 println(
 """
