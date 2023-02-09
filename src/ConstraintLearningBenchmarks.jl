@@ -1,4 +1,4 @@
-module ICNBenchmarks
+module ConstraintLearningBenchmarks
 
 # usings
 using BenchmarkTools
