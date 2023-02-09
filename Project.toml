@@ -1,4 +1,4 @@
-name = "ICNBenchmarks"
+name = "ConstraintLearningBenchmarks"
 uuid = "7d4a60b7-6f97-4d93-8ece-c2667b1c39e3"
 authors = ["Jean-François BAFFIER", "Khalil CHRIT", "Florian RICHOUX", "Pedro PATINHO", "Salvador ABREU"]
 version = "0.1.0"
