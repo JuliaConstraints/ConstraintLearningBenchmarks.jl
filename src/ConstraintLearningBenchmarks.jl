@@ -4,9 +4,9 @@ module ConstraintLearningBenchmarks
 # using BenchmarkTools
 using ConstraintCommons
 using ConstraintDomains
-using ConstraintLearning
+# using ConstraintLearning
 using Constraints
-# using CSV
+using CSV
 # using DataFrames
 # using DataVoyager
 # using Dictionaries
@@ -15,24 +15,33 @@ using DrWatson
 # using JSON
 # using Statistics
 # using StatsBase
-# using Tables
+using Tables
+
+using Base:
+    IOError, UV_EEXIST, UV_ESRCH,
+    Process
+
+using Base.Filesystem:
+    File, open, JL_O_CREAT, JL_O_RDWR, JL_O_RDONLY, JL_O_EXCL,
+    samefile
 
 # constants
 # export ALL_PARAMETERS
 # export BENCHED_CONSTRAINTS
+export EXPLORATION_VARIABLES
 
 # others
 # export analyse_composition
 # export analyze_icn
 # export compositions_benchmark
 # export icn_benchmark
-# export search_space
+export search_space
 # export visualize_compositions
 # export visualize_icn
 
 # includes
 include("constants.jl")
-# include("search_space.jl")
+include("exploration.jl")
 # include("extra_constraints.jl")
 # include("icn.jl")
 # include("composition.jl")
