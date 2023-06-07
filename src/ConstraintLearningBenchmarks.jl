@@ -29,6 +29,7 @@ using Base.Filesystem:
 # export ALL_PARAMETERS
 # export BENCHED_CONSTRAINTS
 export EXPLORATION_VARIABLES
+export USUAL_DOMAINS
 
 # others
 # export analyse_composition
@@ -41,6 +42,7 @@ export search_space
 
 # includes
 include("constants.jl")
+include("parameters.jl")
 include("exploration.jl")
 # include("extra_constraints.jl")
 # include("icn.jl")

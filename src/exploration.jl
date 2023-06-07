@@ -1,9 +1,3 @@
-shrink_concept(s) = Symbol(string(s)[9:end])
-
-Base.string(d::RangeDomain) = "$(d.domain[1])..$(d.domain[end])"
-
-Base.string(D::Vector{<:RangeDomain}) = "[$(prod(d -> string(d) * ',', D)[1:end-1])]"
-
 # Helper function to open files in O_EXCL mode
 function tryopen_exclusive(path::String, mode::Integer = 0o666)
     try
@@ -27,7 +21,7 @@ function search_space(
     # Define the file names TODO: make better metaprogramming
     search = settings.search
     d = @dict(
-        constraint = shrink_concept(concept),
+        constraint = Constraints.shrink_concept(concept),
         domains = string(domains),
         search,
     )

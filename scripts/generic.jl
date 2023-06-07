@@ -1,7 +1,8 @@
 using DrWatson
 
-@quickactivate "ConstraintLearningBenchmark"
+@quickactivate "ConstraintLearningBenchmarks"
 
 using ConstraintLearningBenchmarks
 using ConstraintDomains
 using Constraints
+using Dictionaries
