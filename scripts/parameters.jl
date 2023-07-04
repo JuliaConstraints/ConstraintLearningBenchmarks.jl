@@ -80,4 +80,13 @@ include("generic.jl")
 #     return exploration_spaces
 # end
 
-ConstraintLearningBenchmarks.generate_parameters([domain(0:2), domain(0:5), domain(0:1)]; parameter_explorations=10)
+exploration_spaces = Dict{String,Dict{Symbol,Any}}()
+parameter_explorations = 10
+
+for (s, c) in USUAL_CONSTRAINTS
+    ConstraintLearningBenchmarks.generate_parameters(
+        s, c, [domain(0:2), domain(0:5), domain(0:1)]; exploration_spaces, parameter_explorations
+    )
+end
+
+exploration_spaces

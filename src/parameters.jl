@@ -1,15 +1,20 @@
-function DrWatson.savename(s::Symbol, params::Dict, d)
+function DrWatson.savename(s::Symbol, params, d)
     st(x::Function) = "\'" * string(x) * "\'"
     st(x) = string(x)
+
+    dim = get(params, :dim, 1)
+    if :vals ∈ keys(params)
+        params[:vals] = @view params[:vals][:, dim == 1 ? 1 : (1:dim)]
+    end
 
     fred = (a, b) -> a * "_" * b
 
     fmap = p -> st(p.first) * "=" * st(p.second)
     params_str = mapreduce(fmap, fred, params; init="")
 
-    domains_str = mapreduce(string, fred, d; init="")
+    domains_str = mapreduce(string, fred, d)
 
-    return string(s) * "_" * params_str * "_domains=" * domains_str
+    return string(s) * params_str * "_domains=" * domains_str
 end
 
 function generate_parameters!(D::Dict, iterations::Int, s::Symbol, c, d=domain())
@@ -39,10 +44,17 @@ function generate_parameters!(D::Dict, iterations::Int, s::Symbol, c, d=domain()
     end
 end
 
-function generate_parameters(d=domain(); constraints=USUAL_CONSTRAINTS, parameter_explorations=1)
-    exploration_spaces = Dict{String,Dict{Symbol,Any}}()
-    for (s, c) in constraints
-        generate_parameters!(exploration_spaces, parameter_explorations, s, c, d)
-    end
+function generate_parameters(
+    s::Symbol,
+    c::Constraint,
+    d;
+    exploration_spaces=Dict{String,Dict{Symbol,Any}}(),
+    parameters_explorations=1
+)
+    generate_parameters!(
+        exploration_spaces,
+        parameters_explorations,
+        s, c, d
+    )
     return exploration_spaces
 end

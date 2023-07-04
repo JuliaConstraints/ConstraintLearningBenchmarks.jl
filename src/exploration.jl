@@ -1,5 +1,5 @@
 # Helper function to open files in O_EXCL mode
-function tryopen_exclusive(path::String, mode::Integer = 0o666)
+function tryopen_exclusive(path::String, mode::Integer=0o666)
     try
         return open(path, JL_O_RDWR | JL_O_CREAT | JL_O_EXCL, mode)
     catch ex
@@ -10,21 +10,37 @@ end
 
 function search_space(
     domains,
-    concept;
+    constraint;
+    exploration_spaces=Dict{String,Dict{Symbol,Any}}(),
+    parameters_explorations=0,
     settings=ExploreSettings(domains),
+    symb=Constraints.shrink_concept(concept(constraint)) |> Symbol,
     parameters...
 )
+    if parameters_explorations > 0
+        generate_parameters(
+            symb, constraint, domains;
+            exploration_spaces,
+            parameters_explorations
+        )
+    else
+        name = savename(symb, parameters, domains)
+        exploration_spaces[name] = Dict(parameters)
+    end
+
     # Define the output folder and make the related path if necessary
     output_folder = joinpath(datadir("search_spaces"))
     mkpath(output_folder)
 
     # Define the file names TODO: make better metaprogramming
     search = settings.search
-    d = @dict(
-        constraint = Constraints.shrink_concept(concept),
-        domains = string(domains),
-        search,
-    )
+
+    for (k, p) in exploration_spaces
+        @info " " k p
+    end
+
+
+    return nothing
 
     search === :complete || push!(d, :limit => settings.solutions_limit)
 
