@@ -7,14 +7,45 @@ function DrWatson.savename(s::Symbol, params, d)
         params[:vals] = @view params[:vals][:, dim == 1 ? 1 : (1:dim)]
     end
 
-    fred = (a, b) -> a * "_" * b
+    fred = (a, b, s) -> a * s * b
+    fred1 = (a, b) -> fred(a, b, "-")
+    fred2 = (a, b) -> fred(a, b, "_")
 
     fmap = p -> st(p.first) * "=" * st(p.second)
-    params_str = mapreduce(fmap, fred, params; init="")
+    params_str = mapreduce(fmap, fred1, params; init="")
+    if !isempty(params_str)
+        params_str = "-" * params_str[2:end]
+    end
 
-    domains_str = mapreduce(string, fred, d)
+    domains_str = mapreduce(string, fred2, d)
 
-    return string(s) * params_str * "_domains=" * domains_str
+    return string(s) * params_str * "-domains=" * domains_str
+end
+
+function parse_domains(domains)
+    S = split(domains, '=')
+    S = split(S[end], '_')
+    return map(str -> eval(Meta.parse(str)) |> domain, S)
+end
+
+function parse_params(params)
+    D = Dict{Symbol,String}()
+    if !isempty(params)
+        function f(str)
+            v = split(str, '=')
+            D[Symbol(v[1])] = v[2]
+        end
+        foreach(f, params)
+    end
+    return D
+end
+
+function parse_name(name::AbstractString)
+    v = split(name, "-")
+    s = Symbol(v[1])
+    domains = v[end] |> parse_domains
+    params = v[2:end-1] |> parse_params
+    return s, params, domains
 end
 
 function generate_parameters!(D::Dict, iterations::Int, s::Symbol, c, d=domain())
