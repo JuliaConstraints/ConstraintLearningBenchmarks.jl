@@ -133,7 +133,9 @@ version = "0.5.8"
 
 [[deps.ConstraintsTranslator]]
 deps = ["Constraints", "Coverage", "Debugger", "HTTP", "InteractiveUtils", "JSON3", "JSONSchema", "PkgGraph", "REPL", "TestItems"]
-path = "/Users/baffier/.julia/dev/ConstraintsTranslator"
+git-tree-sha1 = "a1d931eb3e9118b032f0fc4c21c6243605138b56"
+repo-rev = "eval"
+repo-url = "https://github.com/JuliaConstraints/ConstraintsTranslator.jl.git"
 uuid = "314c63f5-3dda-4b35-95e7-4cc933f13053"
 version = "0.0.3"
 
