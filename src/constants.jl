@@ -1,5 +1,5 @@
 # Constraints parameters
-const BENCHED_CONSTRAINTS = deepcopy(usual_constraints)
+const BENCHED_CONSTRAINTS = deepcopy(USUAL_CONSTRAINTS)
 
 const DEFAULT_CONCEPTS = [(:all_different, nothing)]
 const DEFAULT_LANGUAGES = [:Julia] # [:Julia, :C, :CPP]
@@ -65,8 +65,8 @@ const ALL_PARAMETERS = Dict(
 
     # # Learning parameter
     :metric => DEFAULT_METRICS,
-    :generations => [32,64,128], #generations(),
-    :icn_iterations => [32,64,128], #icn_iterations(),
+    :generations => [32, 64, 128], #generations(),
+    :icn_iterations => [32, 64, 128], #icn_iterations(),
     :language => DEFAULT_LANGUAGES,
     :population => DEFAULT_POPULATIONS,
     :loss_sampler => nothing, #DEFAULT_LOSS_SAMPLER,
@@ -78,12 +78,12 @@ const ALL_PARAMETERS = Dict(
 # ALL_PARAMETERS[:domains_size] = 8
 
 """
-to run on khromeleque: 
+to run on khromeleque:
 cd ~/.julia/dev/ICNBenchmarks/scripts
 ../../../../julia -t auto main.jl no_overlap "ALL_PARAMETERS[:generations] = [32,64,128]" "ALL_PARAMETERS[:icn_iterations] = [32,64,128]" "ALL_PARAMETERS[:loss_sampler] = nothing" "ALL_PARAMETERS[:loss_sampling_threshold] = Inf" "ALL_PARAMETERS[:population] = [64,128,256]" "ALL_PARAMETERS[:population] = [64,128,256]" "ALL_PARAMETERS[:complete_search_limit] = 256"
 """
-ALL_PARAMETERS[:generations] = [32,64,128]
-ALL_PARAMETERS[:icn_iterations] = [32,64,128]
+ALL_PARAMETERS[:generations] = [32, 64, 128]
+ALL_PARAMETERS[:icn_iterations] = [32, 64, 128]
 ALL_PARAMETERS[:loss_sampler] = nothing
 ALL_PARAMETERS[:loss_sampling_threshold] = Inf
-ALL_PARAMETERS[:population] = [64,128,256]
+ALL_PARAMETERS[:population] = [64, 128, 256]
