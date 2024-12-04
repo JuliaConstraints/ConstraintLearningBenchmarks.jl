@@ -49,9 +49,9 @@ include("generic.jl")
 
 ConstraintLearningBenchmarks.explore(
     [
-    [domain(0:4), domain(0:1), domain(0:2), domain(0:3)],
-    [domain(0:2), domain(0:2), domain(0:2), domain(0:2)],
-    [domain(0:1), domain(0:1), domain(0:1), domain(0:1)],
-    [domain(0:4), domain(0:4), domain(0:4), domain(0:4)],
+        [domain(0:4), domain(0:1), domain(0:2), domain(0:3)],
+        [domain(0:2), domain(0:2), domain(0:2), domain(0:2)],
+        [domain(0:1), domain(0:1), domain(0:1), domain(0:1)],
+        [domain(0:4), domain(0:4), domain(0:4), domain(0:4)],
     ];
-    parameters_explorations = 1000 )
+    parameters_explorations=10)
