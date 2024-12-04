@@ -1,3 +1,3 @@
-using DrWatson
+include("generic.jl")
 
-@quickactivate "Constraint Learning Benchmarks"
+#SECTION - The following code is for experimental purposes only

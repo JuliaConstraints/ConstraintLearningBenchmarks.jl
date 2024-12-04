@@ -5,7 +5,6 @@ using DrWatson
 using ConstraintLearningBenchmarks
 using ConstraintDomains
 using Constraints
-using Dictionaries
 
 # Visualization for the Term.jl package (ignore)
 if Term ∈ Base.loaded_modules |> values
