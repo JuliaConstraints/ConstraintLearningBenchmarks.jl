@@ -114,7 +114,10 @@ function explore(
     for (space, params) in exploration_spaces
         file_solutions = joinpath(explo_path, space * "-solutions.txt")
         file_non_sltns = joinpath(explo_path, space * "-non_sltns.txt")
-        isfile(file_solutions) && isfile(file_non_sltns) && continue
+        if isfile(file_solutions) && isfile(file_non_sltns)
+            @info "Skipping" space
+            continue
+        end
         rm(file_solutions; force=true)
         rm(file_non_sltns; force=true)
         mkpath(dirname(file_solutions))
