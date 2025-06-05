@@ -2,7 +2,7 @@
 
 julia_version = "1.12.0-beta3"
 manifest_format = "2.0"
-project_hash = "4566be134622fca2b9aba7cead98c498e5ae2225"
+project_hash = "1363d9a7fd3a6c181021759f2179736024219235"
 
 [[deps.AliasTables]]
 deps = ["PtrArrays", "Random"]
@@ -32,12 +32,6 @@ git-tree-sha1 = "6863c5b7fc997eadcabdbaf6c5f201dc30032643"
 uuid = "e1450e63-4bb3-523b-b2a4-4ffa8c0fd77d"
 version = "1.2.2"
 
-[[deps.CSTParser]]
-deps = ["Tokenize"]
-git-tree-sha1 = "0157e592151e39fa570645e2b2debcdfb8a0f112"
-uuid = "00ebfdb7-1f24-5e51-bd34-a7502290713f"
-version = "3.4.3"
-
 [[deps.CSV]]
 deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
 git-tree-sha1 = "deddd8725e5e1cc49ee205a1964256043720a6c3"
@@ -51,10 +45,10 @@ uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
 version = "0.7.8"
 
 [[deps.CommonMark]]
-deps = ["Crayons", "PrecompileTools"]
-git-tree-sha1 = "5fdf00d1979fd4883b44b754fc3423175c9504b4"
+deps = ["PrecompileTools"]
+git-tree-sha1 = "351d6f4eaf273b753001b2de4dffb8279b100769"
 uuid = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
-version = "0.8.16"
+version = "0.9.1"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
@@ -72,10 +66,16 @@ uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 version = "1.3.0+1"
 
 [[deps.CompositionalNetworks]]
-deps = ["ConstraintCommons", "ConstraintDomains", "Dictionaries", "Distances", "JuliaFormatter", "OrderedCollections", "Random", "TestItems", "Unrolled"]
-git-tree-sha1 = "42ea78627a970cc0f4d0707fb87c29a5892a65cc"
+deps = ["ConstraintCommons", "ConstraintDomains", "Dictionaries", "Distances", "ExproniconLite", "JuliaFormatter", "OrderedCollections", "Random", "TestItems", "Unrolled"]
+git-tree-sha1 = "96d6c4b5d8f24b142113a2e35eedb805ff01902c"
 uuid = "4b67e4b5-442d-4ef5-b760-3f5df3a57537"
-version = "0.5.9"
+version = "0.6.0"
+
+    [deps.CompositionalNetworks.extensions]
+    GeneticExt = "Evolutionary"
+
+    [deps.CompositionalNetworks.weakdeps]
+    Evolutionary = "86b6b26d-c046-49b6-aa0b-5f0f74682bd6"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -85,15 +85,15 @@ version = "2.5.0"
 
 [[deps.ConstraintCommons]]
 deps = ["Dictionaries", "TestItems"]
-git-tree-sha1 = "779227189854f846de5f72b518e50dda14c7886b"
+path = "/Users/baffier/.julia/dev/ConstraintCommons"
 uuid = "e37357d9-0691-492f-a822-e5ea6a920954"
-version = "0.2.3"
+version = "0.3.0"
 
 [[deps.ConstraintDomains]]
 deps = ["ConstraintCommons", "Intervals", "PatternFolds", "StatsBase", "TestItems"]
-git-tree-sha1 = "babaef14ea0e0b3c36c152e6ede07910b72f7b4d"
+path = "/Users/baffier/.julia/dev/ConstraintDomains"
 uuid = "5800fd60-8556-4464-8d61-84ebf7a0bedb"
-version = "0.3.15"
+version = "0.4.0"
 
 [[deps.ConstraintLearningBenchmarks]]
 deps = ["CSV", "CompositionalNetworks", "ConstraintCommons", "ConstraintDomains", "Constraints", "ConstraintsTranslator", "DataFrames", "DataVoyager", "Dictionaries", "Distributed", "DrWatson", "JSON", "Random", "Statistics", "StatsBase", "Tables"]
@@ -103,9 +103,9 @@ version = "0.1.0"
 
 [[deps.Constraints]]
 deps = ["CompositionalNetworks", "ConstraintCommons", "ConstraintDomains", "DataFrames", "Dictionaries", "MacroTools", "PrettyTables", "TestItems"]
-git-tree-sha1 = "16ccf71ad523346b270e76c6096fdb4a6e65db00"
+path = "/Users/baffier/.julia/dev/Constraints"
 uuid = "30f324ab-b02d-43f0-b619-e131c61659f7"
-version = "0.5.8"
+version = "0.5.9"
 
 [[deps.ConstraintsTranslator]]
 deps = ["Constraints", "HTTP", "InteractiveUtils", "JSON3", "JSONSchema", "REPL", "TestItems"]
@@ -229,6 +229,11 @@ version = "0.1.11"
 git-tree-sha1 = "27415f162e6028e81c72b82ef756bf321213b6ec"
 uuid = "e2ba6199-217a-4e67-a87a-7c52f15ade04"
 version = "0.1.10"
+
+[[deps.ExproniconLite]]
+git-tree-sha1 = "c13f0b150373771b0fdc1713c97860f8df12e6c2"
+uuid = "55351af7-c7e9-48d6-89ff-24e801d99491"
+version = "0.10.14"
 
 [[deps.FileIO]]
 deps = ["Pkg", "Requires", "UUIDs"]
@@ -368,10 +373,15 @@ uuid = "7d188eb4-7ad8-530c-ae41-71a32a6d4692"
 version = "1.4.1"
 
 [[deps.JuliaFormatter]]
-deps = ["CSTParser", "CommonMark", "DataStructures", "Glob", "PrecompileTools", "TOML", "Tokenize"]
-git-tree-sha1 = "59cf7ad64f1b0708a4fa4369879d33bad3239b56"
+deps = ["CommonMark", "Glob", "JuliaSyntax", "PrecompileTools", "TOML"]
+git-tree-sha1 = "56b382cd34b1a80f63211a0b009461915915bf9e"
 uuid = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
-version = "1.0.62"
+version = "2.1.2"
+
+[[deps.JuliaSyntax]]
+git-tree-sha1 = "937da4713526b96ac9a178e2035019d3b78ead4a"
+uuid = "70703baa-626e-46a2-a12c-08ffd08c73b4"
+version = "0.4.10"
 
 [[deps.JuliaSyntaxHighlighting]]
 deps = ["StyledStrings"]
@@ -723,9 +733,9 @@ version = "1.0.2"
 
 [[deps.Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "OrderedCollections", "TableTraits"]
-git-tree-sha1 = "598cd7c1f68d1e205689b1c2fe65a9f85846f297"
+git-tree-sha1 = "f2c1efbc8f3a609aadf318094f8fc5204bdaf344"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "1.12.0"
+version = "1.12.1"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -751,11 +761,6 @@ weakdeps = ["RecipesBase"]
 
     [deps.TimeZones.extensions]
     TimeZonesRecipesBaseExt = "RecipesBase"
-
-[[deps.Tokenize]]
-git-tree-sha1 = "468b4685af4abe0e9fd4d7bf495a6554a6276e75"
-uuid = "0796e94c-ce3b-5d07-9a54-7f471281c624"
-version = "0.5.29"
 
 [[deps.TranscodingStreams]]
 git-tree-sha1 = "0c45878dcfdcfa8480052b6ab162cdd138781742"
