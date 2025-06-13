@@ -1,3 +1,7 @@
+# Import necessary functions for UUID handling
+import UUIDs: UUID
+import DrWatson: datadir
+
 function DrWatson.savename(s::Symbol, params, d)
     st(x::Function) = "\'" * string(x) * "\'"
     st(x) = string(x)
@@ -25,7 +29,37 @@ end
 function parse_domains(domains)
     S = split(domains, '=')
     S = split(S[end], '_')
-    return map(str -> eval(Meta.parse(str)) |> domain, S)
+    return map(str -> begin
+            try
+                eval(Meta.parse(str)) |> domain
+            catch e
+                # If parsing fails (e.g., for UUID segments), skip this part
+                @warn "Could not parse domain segment '$str', skipping"
+                nothing
+            end
+        end, S) |> filter(!isnothing)
+end
+
+function is_uuid_format(name::AbstractString)
+    # Check if string matches UUID format: 8-4-4-4-12 characters
+    parts = split(name, '-')
+    return length(parts) == 5 &&
+           length(parts[1]) == 8 &&
+           length(parts[2]) == 4 &&
+           length(parts[3]) == 4 &&
+           length(parts[4]) == 4 &&
+           length(parts[5]) == 12 &&
+           all(p -> all(c -> isdigit(c) || c in 'a':'f' || c in 'A':'F', p), parts)
+end
+
+function parse_domains_safe(domains_str)
+    try
+        return parse_domains(domains_str)
+    catch e
+        @warn "Could not parse domains from string: $domains_str, error: $e"
+        # Return empty domain list as fallback
+        return []
+    end
 end
 
 function parse_params(params)
@@ -41,11 +75,36 @@ function parse_params(params)
 end
 
 function parse_name(name::AbstractString)
-    v = split(name, "-")
-    s = Symbol(v[1])
-    domains = v[end] |> parse_domains
-    params = v[2:end-1] |> parse_params
-    return s, params, domains
+    # Check if this is a UUID format
+    if is_uuid_format(name)
+        # For UUID format, we need to look up metadata
+        # Try to find metadata file in the standard location
+        metadata_file = joinpath(datadir(), "exploration_metadata.csv")
+
+        if isfile(metadata_file)
+            try
+                uuid = UUID(name)
+                metadata = lookup_exploration_parameters(uuid, metadata_file)
+                if metadata !== nothing
+                    return metadata[:symbol], metadata[:parameters], metadata[:domains]
+                end
+            catch e
+                @warn "Could not parse UUID or lookup metadata for $name: $e"
+            end
+        end
+
+        # For UUID format without metadata, we can't meaningfully parse it
+        # Return a placeholder that will be handled gracefully
+        @warn "UUID-based exploration space '$name' found but no metadata available. Skipping."
+        return :unknown, Dict{Symbol,Any}(), []
+    else
+        # Legacy format parsing
+        v = split(name, "-")
+        s = Symbol(v[1])
+        domains = v[end] |> parse_domains_safe
+        params = v[2:end-1] |> parse_params
+        return s, params, domains
+    end
 end
 
 function generate_parameters!(D::Dict, iterations::Int, s::Symbol, c, d=domain())
@@ -69,7 +128,9 @@ function generate_parameters!(D::Dict, iterations::Int, s::Symbol, c, d=domain()
                     # @info "debug" k v
                     push!(Q, k => rand(v))
                 end
-                push!(D, savename(s, Q, d) => Q)
+                # Use UUID-based naming instead of long descriptive names
+                uuid = get_exploration_uuid(s, Q, d)
+                push!(D, string(uuid) => Q)
             end
         end
     end

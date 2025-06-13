@@ -2,12 +2,12 @@ using DrWatson
 
 @quickactivate "ConstraintLearningBenchmarks"
 
-using ConstraintLearningBenchmarks
-using ConstraintDomains
-using Constraints
+import ConstraintLearningBenchmarks: BENCHED_CONSTRAINTS, search_space, ConstraintLearningBenchmarks
+import ConstraintDomains: ExploreSettings, domain, ConstraintDomains
+import Constraints
 
 # Visualization for the Term.jl package (ignore)
-if Term ∈ Base.loaded_modules |> values
+if "Term" ∈ map(k -> k.name, Base.loaded_modules |> keys |> collect)
     Base.max() = 0
     Base.isless(f1::Function, f2::Function) = isless(string(f1), string(f2))
     function Base.isless(
