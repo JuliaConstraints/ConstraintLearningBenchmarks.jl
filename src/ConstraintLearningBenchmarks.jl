@@ -13,6 +13,7 @@ import UUIDs: UUID, uuid4, uuid5
 include("constants.jl")
 include("parameters.jl")
 include("constraint_arities.jl")
+include("experiment_storage.jl")
 include("exploration_storage.jl")
 include("icn_storage.jl")
 include("exploration.jl")
@@ -27,5 +28,8 @@ export get_icn_uuid, icn_filename, save_icn_metadata, load_icn_metadata, load_sy
 export flatten_exploration_parameters, flatten_icn_parameters
 export get_system_uuid, system_fingerprint
 export get_constraint_arity, create_domains_for_constraint
+export get_experiment_uuid, get_system_experiment_uuid, experiment_filename
+export save_experiment_metadata, save_experiment_results, flatten_parameters
+export BENCHED_CONSTRAINTS, USUAL_DOMAINS
 
 end
